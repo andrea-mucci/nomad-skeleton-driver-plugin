@@ -1,4 +1,4 @@
-package hello
+package minos
 
 import (
 	"context"
@@ -11,7 +11,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/consul-template/signals"
-	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/nomad/drivers/shared/eventer"
 	"github.com/hashicorp/nomad/drivers/shared/executor"
 	"github.com/hashicorp/nomad/plugins/base"
@@ -24,7 +23,7 @@ const (
 	// pluginName is the name of the plugin
 	// this is used for logging and (along with the version) for uniquely
 	// identifying plugin binaries fingerprinted by the client
-	pluginName = "hello-world-example"
+	pluginName = "minos-world-example"
 
 	// pluginVersion allows the client to identify and use newer versions of
 	// an installed plugin
@@ -63,7 +62,7 @@ var (
 		//
 		// For example, for the schema below a valid configuration would be:
 		//
-		//   plugin "hello-driver-plugin" {
+		//   plugin "minos-driver-plugin" {
 		//     config {
 		//       shell = "fish"
 		//     }
@@ -89,7 +88,7 @@ var (
 		//   job "example" {
 		//     group "example" {
 		//       task "say-hi" {
-		//         driver = "hello-driver-plugin"
+		//         driver = "minos-driver-plugin"
 		//         config {
 		//           greeting = "Hi"
 		//         }
@@ -329,8 +328,8 @@ func (d *HelloDriverPlugin) buildFingerprint() *drivers.Fingerprint {
 		re := regexp.MustCompile("[0-9]\\.[0-9]\\.[0-9]")
 		version := re.FindString(string(out))
 
-		fp.Attributes["driver.hello.shell_version"] = structs.NewStringAttribute(version)
-		fp.Attributes["driver.hello.shell"] = structs.NewStringAttribute(shell)
+		fp.Attributes["driver.minos.shell_version"] = structs.NewStringAttribute(version)
+		fp.Attributes["driver.minos.shell"] = structs.NewStringAttribute(shell)
 	}
 
 	return fp
